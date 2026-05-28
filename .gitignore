@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+
+# Exported images (large PNG files — export lại từ script)
+exports/*.png
+
+# OS files
+.DS_Store
+Thumbs.db

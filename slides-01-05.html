@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok Commerce 2026 — Thành Vũ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  /* ============================================
+     TOKENS
+  ============================================ */
+  :root {
+    --cream:       #FAF9F5;
+    --cream-dark:  #F0EBE3;
+    --white:       #FFFFFF;
+    --black:       #1C1917;
+    --gray:        #6B6560;
+    --gray-dim:    #9E9590;
+    --coral:       #E8693A;
+    --coral-light: #FEF0E9;
+    --coral-mid:   #F5A882;
+    --border:      #E5DDD5;
+    --serif: 'Playfair Display', serif;
+    --sans:  'Be Vietnam Pro', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0E0E0E;
+    padding: 48px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  /* ============================================
+     FIXED CANVAS SYSTEM
+     - slide-wrapper: responsive container (scales)
+     - slide: cố định 1920×1080px, transform scale để fit
+     Tất cả font size dùng px tuyệt đối — không dùng vw/clamp
+  ============================================ */
+  .slide-wrapper {
+    width: 100%;
+    max-width: 1080px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 70px rgba(0,0,0,0.55);
+    /* height được set bởi JS */
+  }
+
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+    /* transform: scale() được set bởi JS */
+    overflow: hidden;
+  }
+
+  /* Badge số trang */
+  .sn {
+    position: absolute;
+    bottom: 28px;
+    right: 48px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.20);
+    z-index: 20;
+  }
+  .sn.on-light { color: rgba(28,25,23,0.16); }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 24px;
+    line-height: 1;
+  }
+  .eyebrow.light { color: var(--coral-mid); }
+
+
+  /* ============================================
+     SLIDE 1 — COVER (Dark full)
+  ============================================ */
+  .s01 { background: var(--black); }
+
+  .s01::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 65% 80% at 85% 48%, rgba(232,105,58,0.15) 0%, transparent 62%),
+      radial-gradient(ellipse 32% 38% at 10% 88%, rgba(232,105,58,0.06) 0%, transparent 55%);
+    z-index: 0;
+  }
+
+  /* Đường kẻ dọc đã bỏ theo yêu cầu */
+
+  .s01-inner {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 220px;
+  }
+
+  .s01-kicker {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--coral-mid);
+    opacity: 0.72;
+    margin-bottom: 32px;
+  }
+
+  /* Headline chia 2 dòng — mỗi dòng font khác nhau */
+  .s01-headline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+
+  /* Dòng 1: câu lớn — Playfair, nổi bật */
+  .hl-big {
+    font-family: var(--serif);
+    font-size: 72px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.14;
+  }
+
+  /* Dòng 2: câu phụ — Be Vietnam Pro, nhỏ hơn, mờ hơn */
+  .hl-sub {
+    font-family: var(--sans);
+    font-size: 28px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.52);
+    line-height: 1.45;
+    letter-spacing: 0.2px;
+  }
+
+  /* GAP highlight trong dòng phụ */
+  .hl-sub .t-accent {
+    color: var(--coral-mid);
+    font-weight: 600;
+    font-style: italic;
+    font-family: var(--serif);
+  }
+
+  .s01-rule {
+    width: 52px;
+    height: 2px;
+    background: var(--coral);
+    opacity: 0.42;
+    margin-bottom: 28px;
+  }
+
+  .s01-byline {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.38);
+  }
+  .s01-byline strong {
+    color: rgba(255,255,255,0.78);
+    font-weight: 600;
+  }
+
+
+  /* ============================================
+     SLIDE 2 — HOOK (Dark)
+  ============================================ */
+  .s02 { background: var(--black); }
+
+  .s02::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 48% 58% at 20% 58%, rgba(232,105,58,0.09) 0%, transparent 56%);
+    z-index: 0;
+  }
+
+  .s02-inner {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 180px 0 220px;
+    gap: 100px;
+  }
+
+  .s02-left {
+    flex: 0 0 900px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .s02-headline {
+    font-family: var(--serif);
+    font-size: 46px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.20;
+    margin-bottom: 40px;
+  }
+
+  .s02-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+  .s02-list li {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.52);
+    line-height: 1.55;
+    padding-left: 30px;
+    position: relative;
+  }
+  .s02-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--coral);
+  }
+
+  .s02-punch {
+    padding: 24px 30px;
+    background: rgba(232,105,58,0.09);
+    border-left: 3px solid var(--coral);
+    border-radius: 0 8px 8px 0;
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.58;
+  }
+  .s02-punch em {
+    color: var(--coral-mid);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .s02-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    opacity: 0.28;
+  }
+  .s02-chip {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 100px;
+    padding: 14px 28px;
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.68);
+    display: inline-block;
+    width: fit-content;
+    text-decoration: line-through;
+  }
+
+
+  /* ============================================
+     SLIDE 3 — PREVIEW 5 GAPS (Light)
+  ============================================ */
+  .s03 { background: var(--cream); }
+
+  .s03-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 220px;
+  }
+
+  .s03-headline {
+    font-family: var(--serif);
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.18;
+    margin-bottom: 28px;
+  }
+
+  .s03-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 56px;
+  }
+  .s03-body p {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--gray);
+    line-height: 1.55;
+    padding-left: 24px;
+    position: relative;
+  }
+  .s03-body p::before {
+    content: '·';
+    position: absolute;
+    left: 8px;
+    color: var(--gray-dim);
+  }
+
+  .s03-gaps {
+    display: flex;
+    gap: 16px;
+  }
+  .gap-pill {
+    flex: 1;
+    background: var(--cream-dark);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    opacity: 0.60;
+  }
+  .gap-pill-num {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gray-dim);
+  }
+  .gap-pill-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.2;
+  }
+
+
+  /* ============================================
+     GAP CHAPTER MARKER (dùng chung cho tất cả Gap slides)
+  ============================================ */
+  .gap-marker {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+
+  .gap-marker-num {
+    font-family: var(--serif);
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--coral);
+    line-height: 1;
+    opacity: 0.85;
+  }
+
+  .gap-marker-name {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--gray);
+    line-height: 1;
+    letter-spacing: 0.2px;
+  }
+
+  .gap-marker-rule {
+    width: 40px;
+    height: 2px;
+    background: var(--coral);
+    opacity: 0.35;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+
+  /* ============================================
+     SLIDE 4 — GAP 1 INTRO (Split layout)
+  ============================================ */
+  .s04 { background: var(--cream); display: flex; }
+
+  .s04-left {
+    flex: 0 0 1080px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 90px 80px 90px 220px;
+    background: var(--cream);
+    background-image: radial-gradient(ellipse 50% 55% at 6% 16%, rgba(255,255,255,0.85) 0%, transparent 62%);
+    position: relative;
+    z-index: 1;
+  }
+
+  .s04-headline {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.22;
+    margin-bottom: 36px;
+  }
+
+  /* Tool chips */
+  .s04-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .s04-tool-chip {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gray);
+    background: var(--cream-dark);
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 20px;
+  }
+
+  /* Example box */
+  .s04-example {
+    background: var(--coral-light);
+    border-left: 3px solid var(--coral);
+    border-radius: 0 10px 10px 0;
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .s04-example-label {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--coral);
+  }
+
+  .s04-example-text {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--black);
+    line-height: 1.58;
+  }
+
+  .s04-example-text em {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--coral);
+  }
+
+  .s04-right {
+    flex: 1;
+    background: var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .s04-placeholder {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-dim);
+    opacity: 0.40;
+  }
+
+
+  /* ============================================
+     SLIDE 5 — GAP 1 DETAIL (Cards)
+  ============================================ */
+  .s05 { background: var(--white); }
+
+  .s05-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 220px;
+  }
+
+  .s05-headline {
+    font-family: var(--serif);
+    font-size: 46px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.22;
+    margin-bottom: 52px;
+  }
+
+  .s05-cards {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .s05-card {
+    flex: 1;
+    max-width: 460px;
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .s05-card::after {
+    content: attr(data-wm);
+    position: absolute;
+    bottom: -10px;
+    right: 8px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 120px;
+    color: var(--black);
+    opacity: 0.042;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .s05-icon {
+    width: 36px;
+    height: 36px;
+    stroke: var(--coral);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    margin-bottom: 4px;
+  }
+
+  .s05-card-label {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--coral);
+  }
+
+  .s05-card-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.22;
+  }
+
+  .s05-card-body {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--gray);
+    line-height: 1.60;
+  }
+
+
+  /* ============================================
+     SLIDE 6 — GAP 2 INTRO (Split layout)
+  ============================================ */
+  .s06 { background: var(--white); display: flex; }
+
+  .s06-left {
+    flex: 0 0 1080px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 90px 80px 90px 220px;
+    background: var(--white);
+    background-image: radial-gradient(ellipse 50% 55% at 6% 16%, rgba(250,249,245,1) 0%, transparent 62%);
+    position: relative;
+    z-index: 1;
+  }
+
+  .s06-headline {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.22;
+    margin-bottom: 40px;
+  }
+
+  .s06-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .s06-list li {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--gray);
+    line-height: 1.58;
+    padding-left: 28px;
+    position: relative;
+  }
+
+  .s06-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--coral);
+    font-weight: 400;
+  }
+
+  .s06-list li strong {
+    color: var(--black);
+    font-weight: 600;
+  }
+
+  .s06-right {
+    flex: 1;
+    background: var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .s06-placeholder {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-dim);
+    opacity: 0.40;
+  }
+
+  /* ============================================
+     SLIDE 7 — GAP 2 PRICING (Split layout)
+  ============================================ */
+  .s07 { background: var(--cream); display: flex; }
+
+  .s07-left {
+    flex: 0 0 1080px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 80px 80px 220px;
+    background: var(--cream);
+    background-image: radial-gradient(ellipse 50% 55% at 6% 16%, rgba(255,255,255,0.85) 0%, transparent 62%);
+    position: relative;
+    z-index: 1;
+  }
+
+  .s07-headline {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.22;
+    margin-bottom: 44px;
+  }
+
+  .s07-costs {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .s07-cost-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .s07-cost-stat {
+    flex: 0 0 auto;
+    min-width: 96px;
+    background: var(--coral-light);
+    border: 1.5px solid rgba(232,105,58,0.20);
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--coral);
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .s07-cost-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 6px;
+  }
+
+  .s07-cost-title {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--black);
+    line-height: 1.25;
+  }
+
+  .s07-cost-body {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--gray);
+    line-height: 1.55;
+  }
+
+  .s07-right {
+    flex: 1;
+    background: var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .s07-placeholder {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-dim);
+    opacity: 0.40;
+  }
+
+
+  /* ============================================
+     SLIDE LABEL (chỉ dùng khi review)
+  ============================================ */
+  .slide-label {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.20);
+    margin-top: -20px;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     SLIDE 1 — COVER
+============================================ -->
+<div class="slide-wrapper">
+  <div class="slide s01">
+    <div class="s01-inner">
+      <div class="s01-kicker">TikTok Commerce · 2026</div>
+      <h1 class="s01-headline">
+        <span class="hl-big">AI đang tạo ra một khoảng cách mới</span>
+        <span class="hl-sub">một khoảng <span class="t-accent">GAP</span> giữa các seller trên TikTok</span>
+      </h1>
+      <div class="s01-rule"></div>
+      <p class="s01-byline"><strong>Thành Vũ</strong> &nbsp;·&nbsp; Chuyên gia TikTok Commerce</p>
+    </div>
+    <span class="sn">S01 · 22</span>
+  </div>
+</div>
+<p class="slide-label">Trang 1 — Cover</p>
+
+
+<!-- ============================================
+     SLIDE 2 — HOOK
+============================================ -->
+<div class="slide-wrapper">
+  <div class="slide s02">
+    <div class="s02-inner">
+      <div class="s02-left">
+        <div class="eyebrow light">Bối cảnh</div>
+        <h2 class="s02-headline">Từ lúc có AI, những người này<br>được đá ra chuồng gà nhiều nhất</h2>
+        <ul class="s02-list">
+          <li>Coder, Designer, Content, rồi cả một phòng Marketing...</li>
+          <li>AI đang tạo ra một cuộc cách mạng về năng suất công việc</li>
+        </ul>
+        <div class="s02-punch">
+          Chỉ cần ý tưởng + <em>nạp tiền mua tài khoản pro</em><br>
+          = khả năng thực thi mạnh mẽ của cả một team
+        </div>
+      </div>
+      <div class="s02-right">
+        <div class="s02-chip">Coder</div>
+        <div class="s02-chip">Designer</div>
+        <div class="s02-chip">Content Writer</div>
+        <div class="s02-chip">Phòng Marketing</div>
+      </div>
+    </div>
+    <span class="sn">S02 · 22</span>
+  </div>
+</div>
+<p class="slide-label">Trang 2 — Hook</p>
+
+
+<!-- ============================================
+     SLIDE 3 — PREVIEW 5 GAPS
+============================================ -->
+<div class="slide-wrapper">
+  <div class="slide s03">
+    <div class="s03-inner">
+      <div class="eyebrow">Phần 1 · Mở đầu</div>
+      <h2 class="s03-headline">5 khoảng cách đang phân hoá seller —<br>và bạn đang bị kẹt ở đâu?</h2>
+      <div class="s03-body">
+        <p>Gap không nằm ở sản phẩm, không nằm ở giá</p>
+        <p>Gap nằm ở năng lực, hệ thống, và tư duy của người điều hành</p>
+        <p>5 gaps dưới đây sẽ cho bạn thấy mình đang ở đâu</p>
+      </div>
+      <div class="s03-gaps">
+        <div class="gap-pill">
+          <div class="gap-pill-num">Gap 01</div>
+          <div class="gap-pill-name">Nghiên cứu</div>
+        </div>
+        <div class="gap-pill">
+          <div class="gap-pill-num">Gap 02</div>
+          <div class="gap-pill-name">Marketing</div>
+        </div>
+        <div class="gap-pill">
+          <div class="gap-pill-num">Gap 03</div>
+          <div class="gap-pill-name">Dữ liệu</div>
+        </div>
+        <div class="gap-pill">
+          <div class="gap-pill-num">Gap 04</div>
+          <div class="gap-pill-name">Vận hành</div>
+        </div>
+        <div class="gap-pill">
+          <div class="gap-pill-num">Gap 05</div>
+          <div class="gap-pill-name">Sự phát triển của sếp</div>
+        </div>
+      </div>
+    </div>
+    <span class="sn on-light">S03 · 22</span>
+  </div>
+</div>
+<p class="slide-label">Trang 3 — Preview 5 Gaps</p>
+
+
+<!-- ============================================
+     SLIDE 4 — GAP 1 INTRO
+============================================ -->
+<div class="slide-wrapper">
+  <div class="slide s04">
+    <div class="s04-left">
+      <div class="gap-marker">
+        <div class="gap-marker-num">01</div>
+        <div class="gap-marker-name">Khoảng gap về nghiên cứu thị trường & insight</div>
+        <div class="gap-marker-rule"></div>
+      </div>
+      <h2 class="s04-headline">Seller top có nhiều hơn một cách<br>để research thị trường và spy đối thủ</h2>
+
+      <div class="s04-tools">
+        <div class="s04-tool-chip">TikTok Creative Center</div>
+        <div class="s04-tool-chip">Kalodata</div>
+        <div class="s04-tool-chip">Shoplus</div>
+        <div class="s04-tool-chip">Minea</div>
+        <div class="s04-tool-chip">AI Agent</div>
+      </div>
+
+      <div class="s04-example">
+        <div class="s04-example-label">Ví dụ thực tế</div>
+        <div class="s04-example-text">
+          AI agent tự động lấy insight từ hàng nghìn video YouTube —
+          sản phẩm đang hot, angle đang work, pain point của khách hàng —
+          <em>trong vài phút thay vì vài ngày</em>
+        </div>
+      </div>
+    </div>
+    <div class="s04-right">
+      <div class="s04-placeholder">Visual</div>
+    </div>
+    <span class="sn on-light">S04 · 22</span>
+  </div>
+</div>
+<p class="slide-label">Trang 4 — Gap 1 Dẫn nhập</p>
+
+
+<!-- ============================================
+     SLIDE 5 — GAP 1 DETAIL
+============================================ -->
+<div class="slide-wrapper">
+  <div class="slide s05">
+    <div class="s05-inner">
+      <div class="gap-marker">
+        <div class="gap-marker-num">01</div>
+        <div class="gap-marker-name">Khoảng gap về nghiên cứu thị trường & insight</div>
+        <div class="gap-marker-rule"></div>
+      </div>
+      <h2 class="s05-headline">Research đúng là research 3 thứ —<br>sản phẩm, đối thủ, và khách hàng</h2>
+      <div class="s05-cards">
+
+        <div class="s05-card" data-wm="01">
+          <svg class="s05-icon" viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+            <path d="M9 9h6M9 12h4"/>
+          </svg>
+          <div class="s05-card-label">Sản phẩm</div>
+          <div class="s05-card-title">Research sản phẩm hot</div>
+          <div class="s05-card-body">AI phân tích search volume, hashtag trend, GMV tăng trưởng theo tuần — biết cái gì đang lên trước thị trường.</div>
+        </div>
+
+        <div class="s05-card" data-wm="02">
+          <svg class="s05-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <div class="s05-card-label">Đối thủ</div>
+          <div class="s05-card-title">Research đối thủ</div>
+          <div class="s05-card-body">Biết đối thủ đang chạy creative gì, angle nào hiệu quả, giá nào đang win — theo thời gian thực.</div>
+        </div>
+
+        <div class="s05-card" data-wm="03">
+          <svg class="s05-icon" viewBox="0 0 24 24">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          </svg>
+          <div class="s05-card-label">Khách hàng</div>
+          <div class="s05-card-title">Research insight khách hàng</div>
+          <div class="s05-card-body">AI đọc hàng nghìn comment, review, pain point và tổng hợp lại trong vài phút thay vì vài ngày.</div>
+        </div>
+
+      </div>
+    </div>
+    <span class="sn on-light">S05 · 22</span>
+  </div>
+</div>
+<p class="slide-label">Trang 5 — Gap 1 Chi tiết</p>
+
+
+<!-- ============================================
+     SLIDE 6 — GAP 2 INTRO
+============================================ -->
+<div class="slide-wrapper">
+  <div class="slide s06">
+
+    <div class="s06-left">
+      <div class="gap-marker">
+        <div class="gap-marker-num">02</div>
+        <div class="gap-marker-name">Khoảng gap về hiệu suất marketing</div>
+        <div class="gap-marker-rule"></div>
+      </div>
+
+      <h2 class="s06-headline">Chất lượng liên tục được nâng cao —<br>AI đang làm được những thứ trước đây rất tốn kém</h2>
+
+      <ul class="s06-list">
+        <li>
+          <strong>Hình ảnh:</strong> AI đã làm được ảnh bìa, ảnh sản phẩm ecommerce chất lượng cao — không cần studio, không cần designer
+        </li>
+        <li>
+          <strong>Video UGC:</strong> Chất lượng ngày càng tốt — Google Flow có khả năng làm video Lip Sync thuyết phục, khó phân biệt với người thật
+        </li>
+      </ul>
+    </div>
+
+    <div class="s06-right">
+      <div class="s06-placeholder">Visual</div>
+    </div>
+
+    <span class="sn on-light">S06 · 22</span>
+  </div>
+</div>
+<p class="slide-label">Trang 6 — Gap 2 Dẫn nhập</p>
+
+
+<!-- ============================================
+     SLIDE 7 — GAP 2 PRICING
+============================================ -->
+<div class="slide-wrapper">
+  <div class="slide s07">
+
+    <div class="s07-left">
+      <div class="gap-marker">
+        <div class="gap-marker-num">02</div>
+        <div class="gap-marker-name">Khoảng gap về hiệu suất marketing</div>
+        <div class="gap-marker-rule"></div>
+      </div>
+
+      <h2 class="s07-headline">Chi phí marketing đã giảm xuống mức<br>mà trước đây không ai dám nghĩ tới</h2>
+
+      <div class="s07-costs">
+
+        <div class="s07-cost-item">
+          <div class="s07-cost-stat">$20<br>/tháng</div>
+          <div class="s07-cost-text">
+            <div class="s07-cost-title">Ảnh sản phẩm chất lượng cao</div>
+            <div class="s07-cost-body">ChatGPT Plus với prompt đúng = hàng trăm ảnh ecommerce chuyên nghiệp — không cần studio, không cần designer</div>
+          </div>
+        </div>
+
+        <div class="s07-cost-item">
+          <div class="s07-cost-stat">–75%</div>
+          <div class="s07-cost-text">
+            <div class="s07-cost-title">Content & phân tích dữ liệu qua API</div>
+            <div class="s07-cost-body">DeepSeek rẻ hơn 75% so với GPT-4 — viết hàng trăm brief, phân tích dữ liệu với chi phí gần như bằng 0</div>
+          </div>
+        </div>
+
+        <div class="s07-cost-item">
+          <div class="s07-cost-stat">~0đ</div>
+          <div class="s07-cost-text">
+            <div class="s07-cost-title">Landing page & page bán hàng</div>
+            <div class="s07-cost-body">Các AI builder cho phép tạo page chuyển đổi cao gần như miễn phí — không cần lập trình viên</div>
+          </div>
+        </div>
+
+        <div class="s07-cost-item">
+          <div class="s07-cost-stat">–90%+</div>
+          <div class="s07-cost-text">
+            <div class="s07-cost-title">Video UGC & quảng cáo</div>
+            <div class="s07-cost-body">AI video (Kling, Runway, Veo) đang dần thay thế quay phim thực tế — chi phí sản xuất giảm mạnh</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="s07-right">
+      <div class="s07-placeholder">Visual</div>
+    </div>
+
+    <span class="sn on-light">S07 · 22</span>
+  </div>
+</div>
+<p class="slide-label">Trang 7 — Gap 2 Chi phí</p>
+
+
+<!-- ============================================
+     SCALE SCRIPT — tính toán scale cho tất cả slides
+     Chạy lại khi resize window
+============================================ -->
+<script>
+  function scaleSlides() {
+    document.querySelectorAll('.slide-wrapper').forEach(function(wrapper) {
+      var scale = wrapper.offsetWidth / 1920;
+      wrapper.style.height = Math.round(1080 * scale) + 'px';
+      wrapper.querySelector('.slide').style.transform = 'scale(' + scale + ')';
+    });
+  }
+  window.addEventListener('load', scaleSlides);
+  window.addEventListener('resize', scaleSlides);
+</script>
+
+</body>
+</html>
